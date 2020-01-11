@@ -1,2 +1,2 @@
 # NewsScraper
-Scrape the news and give your comments
+Scrape Notebookcheck.com news and give your comments
