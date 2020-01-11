@@ -11,11 +11,19 @@ module.exports = {
   },
   // Create a new note
   create: function(req, res) {
-   TODO:
+   db.Note
+    .create(req.body)
+    .then(dbNote => res.json(dbNote))
+    .catch(err => res.status(422).json(err))
     
   },
   // Delete a note with a given id
   delete: function(req, res) {
-    TODO:
+    db.Note
+    .find({ _headlineId: req.params.id })
+    .then(dbNote => dbNote.remove())
+    .then(dbNote => res.json(dbNote))
+    .catch(err => res.status(422).json(err));
   }
 };
+

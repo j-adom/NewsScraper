@@ -9,15 +9,15 @@ var cheerio = require("cheerio");
 var scrape = function() {
 
   // Scrape the NYTimes website
-  return axios.get( TODO: "ENTER THE WEBSITE URL HERE").then(function(res) {
+  return axios.get("https://www.notebookcheck.net/").then(function(res) {
     var $ = cheerio.load(res.data);
-    console.log("scraping");
+    console.log("scraping", $);
     // Make an empty array to save our article info
     var articles = [];
 
     // Now, find and loop through each element that has the ".assetWrapper" class
     // (i.e, the section holding the articles)
-    $(".assetWrapper").each(function(i, element) {
+    $(".introa_news").each(function(i, element) {
       // In each article section, we grab the headline, URL, and summary
 
       // Grab the headline of the article
@@ -28,12 +28,12 @@ var scrape = function() {
 
       // Grab the URL of the article
       var url = $(this)
-        .find("a")
+        //.find("a")
         .attr("href");
 
       // Grab the summary of the article
       var sum = $(this)
-        .find("p")
+        .find(".introa_rm_abstract")
         .text()
         .trim();
 
@@ -47,13 +47,17 @@ var scrape = function() {
         // Initialize an object we will push to the articles array
         var dataToAdd = {
          
-         FIXME: //See solution in  Chapter 18 activty 11 Scraping into a DB
+          headline: headNeat,
+          summary: sumNeat,
+          url: url
+         
         };
-
+        
         // Push new article into articles array
         articles.push(dataToAdd);
       }
     });
+    console.log(articles)
     return articles;
   });
 };
